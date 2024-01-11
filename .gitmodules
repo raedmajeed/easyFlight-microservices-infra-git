@@ -1,0 +1,15 @@
+[submodule "path-to-submodules/path-to-submodules"]
+	path = path-to-submodules/path-to-submodules
+	url = https://github.com/raedmajeed/easyFlight-api-gateway
+[submodule "path-to-submodules/easyFlight-api-gateway"]
+	path = path-to-submodules/easyFlight-api-gateway
+	url = https://github.com/raedmajeed/easyFlight-api-gateway
+[submodule "path-to-submodules/easFlight-airline-authority"]
+	path = path-to-submodules/easFlight-airline-authority
+	url = https://github.com/raedmajeed/easyFlight-airline-authority-service
+[submodule "path-to-submodules/easyFlight-booking-service"]
+	path = path-to-submodules/easyFlight-booking-service
+	url = https://github.com/raedmajeed/easyFlight-booking-service
+[submodule "path-to-submodules/easyFlight-notification-service"]
+	path = path-to-submodules/easyFlight-notification-service
+	url = https://github.com/raedmajeed/easyFlight-notification-service
