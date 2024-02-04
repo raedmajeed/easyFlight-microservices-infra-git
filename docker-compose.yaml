@@ -90,6 +90,7 @@ services:
 
   mysql:
     image: mysql:latest
+    platform: linux/arm64
     container_name: mysql
     networks:
       - easyflight-network
@@ -97,8 +98,8 @@ services:
       MYSQL_ROOT_PASSWORD: 12345
       MYSQL_PASSWORD: 1234
       MYSQL_USER: raed
-      MYSQL_DATABASE_1: "flight_booking_booking"
-      MYSQL_DATABASE_2: "flight_booking_airline"
+      MYSQL_DATABASE: "flight_booking_booking"
+      MYSQL_DATABASE_1: "flight_booking_airline"
     ports:
       - "3307:3306"
     volumes:
