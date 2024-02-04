@@ -89,7 +89,7 @@ services:
       - easyflight-network
 
   mysql:
-    image: mysql
+    image: mysql:8
     container_name: mysql
     networks:
       - easyflight-network
