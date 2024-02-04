@@ -59,7 +59,7 @@ services:
       - easyflight-network
 
   booking-service:
-    image: raedmajeed/booking-service:4
+    image: raedmajeed/booking-service:10
     container_name: booking-service
     ports:
       - "9091:9091"
@@ -89,7 +89,7 @@ services:
       - easyflight-network
 
   mysql:
-    image: mysql:latest
+    image: mysql
     container_name: mysql
     networks:
       - easyflight-network
@@ -98,7 +98,6 @@ services:
       MYSQL_PASSWORD: 1234
       MYSQL_USER: raed
       MYSQL_DATABASE: "flight_booking_booking"
-      MYSQL_DATABASE_1: "flight_booking_airline"
     ports:
       - "3307:3306"
     volumes:
