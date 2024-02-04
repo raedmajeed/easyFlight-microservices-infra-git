@@ -90,7 +90,6 @@ services:
 
   mysql:
     image: mysql:latest
-    platform: linux/arm64
     container_name: mysql
     networks:
       - easyflight-network
