@@ -52,7 +52,7 @@ services:
     environment:
       ADMINPORT: 6060
       ADMINBOOKINGPORT: 9095
-      KAFKABROKER: :9092
+      KAFKABROKER: 34.201.114.50:9092
       DBPORT: 3306
       DBNAME: flight_booking_airline
       DBUSER: admin
@@ -97,10 +97,15 @@ services:
     restart: always
 
   notification-service:
-    image: raedmajeed/notification-service:2
+    image: raedmajeed/notification-service:3
     container_name: notification-service
     depends_on:
       - broker
+    environment:
+      EMAIL: raedam786@gmail.com
+      PASSWORD: gtuemqhhzagxvjrh
+      KAFKABROKER: 34.201.114.50:9092
+      PORT: 8082
 
   mysql:
     image: mysql:8
