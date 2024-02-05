@@ -40,7 +40,7 @@ services:
     restart: always
 
   airline-service:
-    image: raedmajeed/airline-service:9
+    image: raedmajeed/airline-service:11
     container_name: airline-service
     ports:
       - "6061:6061"
@@ -63,7 +63,7 @@ services:
       BUSINESSSURGE: 1.9
 
   booking-service:
-    image: raedmajeed/booking-service:9
+    image: raedmajeed/booking-service:11
     container_name: booking-service
     ports:
       - "9091:9091"
@@ -74,7 +74,7 @@ services:
       ADMINBOOKINGPORT: "airline-service:9095"
       DBPORT: 3306
       DBNAME: flight_booking_booking
-      DBUSER: root
+      DBUSER: admin
       DBPASSWORD: 12345678
       DBHOST: flight-booking-airline.c9uw0oi28nu9.us-east-1.rds.amazonaws.com
       REDISHOST: redis-service:6379
