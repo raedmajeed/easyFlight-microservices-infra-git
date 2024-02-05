@@ -36,7 +36,7 @@ services:
       - notification-service
       - frontend-service
     ports:
-      - "8080:80"
+      - "8083:8080"
     restart: always
 
   airline-service:
@@ -73,10 +73,10 @@ services:
       BSERVICEPORT: 9091
       ADMINBOOKINGPORT: "airline-service:9095"
       DBPORT: 3306
-      DBNAME: flight_booking_booking
+      DBNAME: flight_booking
       DBUSER: root
       DBPASSWORD: 12345
-      DBHOST: mysql
+      DBHOST: localhost
       REDISHOST: redis-service:6379
       SECRETKEY: "secret-key"
       SERVICETOKEN: VA2b78db376a44009f23efc9b5f786f629
