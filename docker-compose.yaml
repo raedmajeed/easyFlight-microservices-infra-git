@@ -3,8 +3,6 @@ services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     container_name: zookeeper
-    networks:
-      - easyflight-network
     environment:
       ZOOKEEPER_SERVER_ID: 1
       ZOOKEEPER_CLIENT_PORT: 2181
@@ -19,8 +17,6 @@ services:
       - "9092:9092"
     depends_on:
       - zookeeper
-    networks:
-      - easyflight-network
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
@@ -41,12 +37,10 @@ services:
       - frontend-service
     ports:
       - "8080:80"
-    networks:
-      - easyflight-network
     restart: always
 
   airline-service:
-    image: raedmajeed/airline-service:4
+    image: raedmajeed/airline-service:9
     container_name: airline-service
     ports:
       - "6061:6061"
@@ -55,17 +49,41 @@ services:
       - redis-service
       - broker
     restart: always
-    networks:
-      - easyflight-network
+    environment:
+      ADMINPORT: 6060
+      ADMINBOOKINGPORT: 9095
+      KAFKABROKER: :9092
+      DBPORT: 3306
+      DBNAME: flight_booking_airline
+      DBUSER: root
+      DBPASSWORD: 12345
+      DBHOST: mysql
+      REDISHOST: redis-service:6379
+      SECRETKEY: "secret-key"
+      BUSINESSSURGE: 1.9
 
   booking-service:
-    image: raedmajeed/booking-service:10
+    image: raedmajeed/booking-service:9
     container_name: booking-service
     ports:
       - "9091:9091"
     restart: always
-    networks:
-      - easyflight-network
+    environment:
+      PORT: 9090
+      BSERVICEPORT: 9091
+      ADMINBOOKINGPORT: "airline-service:9095"
+      DBPORT: 3306
+      DBNAME: flight_booking_booking
+      DBUSER: root
+      DBPASSWORD: 12345
+      DBHOST: mysql
+      REDISHOST: redis-service:6379
+      SECRETKEY: "secret-key"
+      SERVICETOKEN: VA2b78db376a44009f23efc9b5f786f629
+      SID: ACeed503561915995469a10fd7a8d54c47
+      TOKEN: 649aac0165591a99b792b8e445d24fc4
+      RAZORPAYKEYID: rzp_test_3Zm0sCFZcVmktU
+      RAZORPAYSECRETKEY: WrjpGGCVJ24oYzKfj12tHftK
     depends_on:
       - mysql
       - redis-service
@@ -76,8 +94,6 @@ services:
     container_name: frontend-service
     ports:
       - "3030:3030"
-    networks:
-      - easyflight-network
     restart: always
 
   notification-service:
@@ -85,21 +101,17 @@ services:
     container_name: notification-service
     depends_on:
       - broker
-    networks:
-      - easyflight-network
 
   mysql:
     image: mysql:8
     container_name: mysql
-    networks:
-      - easyflight-network
     environment:
       MYSQL_ROOT_PASSWORD: 12345
       MYSQL_PASSWORD: 1234
       MYSQL_USER: raed
       MYSQL_DATABASE: "flight_booking_booking"
     ports:
-      - "3307:3306"
+      - "3306:3306"
     volumes:
       - easyflight-volume:/var/lib/mysql
 
@@ -108,12 +120,6 @@ services:
     container_name: redis-service
     ports:
       - "6379:6379"
-    networks:
-      - easyflight-network
 
 volumes:
   easyflight-volume:
-
-networks:
-  easyflight-network:
-    driver: bridge
