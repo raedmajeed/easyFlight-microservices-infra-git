@@ -40,7 +40,7 @@ services:
     restart: always
 
   airline-service:
-    image: raedmajeed/airline-service:11
+    image: raedmajeed/airline-service:12
     container_name: airline-service
     ports:
       - "6061:6061"
@@ -63,7 +63,7 @@ services:
       BUSINESSSURGE: 1.9
 
   booking-service:
-    image: raedmajeed/booking-service:11
+    image: raedmajeed/booking-service:12
     container_name: booking-service
     ports:
       - "9091:9091"
@@ -90,14 +90,14 @@ services:
       - broker
 
   frontend-service:
-    image: raedmajeed/frontend-service:2
+    image: raedmajeed/frontend-service:3
     container_name: frontend-service
     ports:
       - "3030:3030"
     restart: always
 
   notification-service:
-    image: raedmajeed/notification-service:3
+    image: raedmajeed/notification-service:4
     container_name: notification-service
     depends_on:
       - broker
