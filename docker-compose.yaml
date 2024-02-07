@@ -22,7 +22,7 @@ services:
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_HOST://broker:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
@@ -52,7 +52,7 @@ services:
     environment:
       ADMINPORT: 6060
       ADMINBOOKINGPORT: 9095
-      KAFKABROKER: localhost:9092
+      KAFKABROKER: 34.203.34.238:9092
       DBPORT: 3306
       DBNAME: flight_booking_airline
       DBUSER: admin
@@ -104,7 +104,7 @@ services:
     environment:
       EMAIL: raedam786@gmail.com
       PASSWORD: gtuemqhhzagxvjrh
-      KAFKABROKER: localhost:9092
+      KAFKABROKER: 34.203.34.238:9092
       PORT: 8082
 
   mysql:
