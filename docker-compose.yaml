@@ -68,7 +68,6 @@ services:
       DBUSER: admin
       DBPASSWORD: 12345678
       DBHOST: flight-booking-airline.c9uw0oi28nu9.us-east-1.rds.amazonaws.com
-      DBHOST: localhost
       REDISHOST: redis-service:6379
       SECRETKEY: "secret-key"
       BUSINESSSURGE: 1.9
