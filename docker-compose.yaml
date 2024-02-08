@@ -1,4 +1,8 @@
 version: "3"
+networks:
+  app-network:
+    driver: bridge
+
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -9,6 +13,8 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - "22181:2181"
+    networks:
+      - app-network
 
   broker:
     image: confluentinc/cp-kafka:latest
@@ -22,10 +28,12 @@ services:
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS:  PLAINTEXT://broker:9092,PLAINTEXT_HOST://localhost:29092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+    networks:
+      - app-network
 
   api-service:
     image: raedmajeed/api-service:3
@@ -38,6 +46,8 @@ services:
     ports:
       - "8083:8080"
     restart: always
+    networks:
+      - app-network
 
   airline-service:
     image: raedmajeed/airline-service:12
@@ -52,15 +62,18 @@ services:
     environment:
       ADMINPORT: 6060
       ADMINBOOKINGPORT: 9095
-      KAFKABROKER: 34.203.34.238:9092
+      KAFKABROKER: broker:9092
       DBPORT: 3306
       DBNAME: flight_booking_airline
       DBUSER: admin
       DBPASSWORD: 12345678
       DBHOST: flight-booking-airline.c9uw0oi28nu9.us-east-1.rds.amazonaws.com
+      DBHOST: localhost
       REDISHOST: redis-service:6379
       SECRETKEY: "secret-key"
       BUSINESSSURGE: 1.9
+    networks:
+      - app-network
 
   booking-service:
     image: raedmajeed/booking-service:12
@@ -88,6 +101,9 @@ services:
       - mysql
       - redis-service
 #      - broker
+    networks:
+      - app-network
+
 
   frontend-service:
     image: raedmajeed/frontend-service:3
@@ -104,8 +120,10 @@ services:
     environment:
       EMAIL: raedam786@gmail.com
       PASSWORD: gtuemqhhzagxvjrh
-      KAFKABROKER: 34.203.34.238:9092
+      KAFKABROKER: broker:9092
       PORT: 8082
+    networks:
+      - app-network
 
   mysql:
     image: mysql:8
@@ -119,14 +137,17 @@ services:
       - "3306:3306"
     volumes:
       - easyflight-volume:/var/lib/mysql
+    networks:
+      - app-network
+
 
   redis-service:
     image: redis
     container_name: redis-service
     ports:
       - "6379:6379"
-
-
+    networks:
+      - app-network
 
 volumes:
   easyflight-volume:
