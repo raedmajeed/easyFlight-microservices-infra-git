@@ -105,7 +105,7 @@ services:
 
 
   frontend-service:
-    image: raedmajeed/frontend-service:5
+    image: raedmajeed/frontend-service:6
     container_name: frontend-service
     ports:
       - "3030:3030"
