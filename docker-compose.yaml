@@ -110,6 +110,8 @@ services:
     ports:
       - "3030:3030"
     restart: always
+    networks:
+      - app-network
 
   notification-service:
     image: raedmajeed/notification-service:5
