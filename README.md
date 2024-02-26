@@ -147,3 +147,17 @@ networks:
 
 volumes:
 easyflight-volume:
+
+
+
+PORT=8080
+
+ADMINPORT=airline-service:6060
+BSERVICEPORT=booking-service:9091
+REDISHOST=redis-service:6379
+
+# ADMINPORT=:6060
+# BSERVICEPORT=:9091
+# REDISHOST=:6379
+
+SECRETKEY="secret-key"

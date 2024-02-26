@@ -66,8 +66,6 @@ services:
       DBPORT: 3306
       DBNAME: flight_booking_airline
       DBUSER: admin
-      DBPASSWORD: 12345678
-      DBHOST: flight-booking-airline.c9uw0oi28nu9.us-east-1.rds.amazonaws.com
       REDISHOST: redis-service:6379
       SECRETKEY: "secret-key"
       BUSINESSSURGE: 1.9
@@ -87,15 +85,8 @@ services:
       DBPORT: 3306
       DBNAME: flight_booking_booking
       DBUSER: admin
-      DBPASSWORD: 12345678
-      DBHOST: flight-booking-airline.c9uw0oi28nu9.us-east-1.rds.amazonaws.com
       REDISHOST: redis-service:6379
       SECRETKEY: "secret-key"
-      SERVICETOKEN: VA2b78db376a44009f23efc9b5f786f629
-      SID: ACeed503561915995469a10fd7a8d54c47
-      TOKEN: 649aac0165591a99b792b8e445d24fc4
-      RAZORPAYKEYID: rzp_test_3Zm0sCFZcVmktU
-      RAZORPAYSECRETKEY: WrjpGGCVJ24oYzKfj12tHftK
     depends_on:
       - mysql
       - redis-service
@@ -119,8 +110,6 @@ services:
 #    depends_on:
 #      - broker
     environment:
-      EMAIL: raedam786@gmail.com
-      PASSWORD: gtuemqhhzagxvjrh
       KAFKABROKER: broker:9092
       PORT: 8082
     networks:
